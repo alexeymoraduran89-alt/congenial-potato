@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxbau Studio</title>
+    <!-- Tipografía moderna minimalista inspirada en el diseño Porsche -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body class="porsche-theme">
+    
+    <!-- Barra superior de renderizado (estilo Porsche) -->
+    <div id="render-bar" class="render-bar"></div>
+
+    <!-- Header Principal Estilo Porsche Configurator -->
+    <header class="porsche-header">
+        <div class="header-left">
+            <button class="btn-back" id="btn-back" title="Volver al catálogo general">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Regresar al menú principal</span>
+            </button>
+            <div class="header-divider"></div>
+            <div class="brand-info">
+                <span class="brand-logo">LUXBAU</span>
+                <span class="brand-category">INTERIOR CONFIGURATOR</span>
+            </div>
+        </div>
+
+        <div class="header-center">
+            <div class="model-badge">
+                <span class="model-title">Habitación de estar</span>
+                <span class="model-variant" id="header-active-variant">01 • Lino Nórdico Cálido</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout Principal: Visualizador Central y Selector Lateral/Inferior -->
+    <main class="configurator-layout">
+        
+        <!-- Escenario Visual Principal -->
+        <section class="stage-container" id="stage-container">
+            <div class="stage-viewport" id="stage-viewport">
+                
+                <!-- Doble capa para transición suave sin parpadeos -->
+                <img id="img-layer-current" class="stage-image active" src="./media/variation01.png" alt="Interior Habitación - Acabado actual">
+                <img id="img-layer-next" class="stage-image" src="./media/variation01.png" alt="Interior Habitación - Siguiente">
+
+                <!-- Pantalla de Espera / Render (Estilo Porsche CAD/Cloud Stream) -->
+                <div class="render-loading-screen" id="render-loading-screen">
+                    <div class="render-hud-box">
+                        <div class="porsche-spinner">
+                            <span class="spin-ring"></span>
+                        </div>
+                        <div class="render-hud-texts">
+                            <span class="hud-overline">LUXBAU REALTIME RENDER</span>
+                            <span class="hud-status" id="hud-status-text">Cargando nuevo acabado...</span>
+                        </div>
+                        <div class="hud-progress-track">
+                            <div class="hud-progress-fill" id="hud-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notificación HUD Flotante (Confirmación de selección) -->
+                <div class="hud-toast" id="hud-toast">
+                    <span class="toast-dot"></span>
+                    <span class="toast-text" id="toast-text">Estilo aplicado: Lino Nórdico Cálido</span>
+                </div>
+
+                <!-- Aviso discreto de mobiliario -->
+                <div class="disclaimer-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Mobiliario con fines ilustrativos (no incluido) • Enfoque en tonos y acabados de pared</span>
+                </div>
+
+                <!-- Controles en pantalla del visor -->
+                <div class="stage-floating-actions">
+                    <button class="stage-tool-btn" id="btn-zoom-toggle" title="Ampliar imagen (Zoom)">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        <span>Detalle</span>
+                    </button>
+                    <button class="stage-tool-btn" id="btn-quick-prev" title="Estilo anterior (Flecha Izq)">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                    <button class="stage-tool-btn" id="btn-quick-next" title="Siguiente estilo (Flecha Der)">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Panel de Configuración Porsche (Limpio, enfocado y elegante) -->
+        <aside class="controls-panel">
+            
+            <div class="panel-header">
+                <span class="panel-overline">PASO 01 / ACABADOS DE PARED</span>
+                <h1 class="panel-title">Paleta de Interiores & Arte</h1>
+                <p class="panel-subtitle">Pruebe las diferentes configuraciones visuales del espacio seleccionando una de las muestras.</p>
+            </div>
+
+            <!-- Selector de Muestras Circulares Estilo Porsche (Paint/Leather Swatches) -->
+            <div class="swatches-container">
+                <span class="swatches-label">Muestras de Color y Textura:</span>
+                
+                <div class="swatches-list">
+                    
+                    <!-- Opción 1: Variation 01 -->
+                    <button class="swatch-item active" data-index="0" data-img="./media/variation01.png" data-name="Lino Nórdico Cálido" data-tone="Beige Arena Natural" data-art="Cuadro de paisaje neutro en tonos tierra suaves" data-desc="Aporta máxima calidez y aprovecha la iluminación directa de la ventana con un acabado mineral aterciopelado mate.">
+                        <div class="swatch-outer-ring">
+                            <span class="swatch-core" style="background: linear-gradient(135deg, #e4d7c6 0%, #d1c0ae 100%);"></span>
+                        </div>
+                        <div class="swatch-info">
+                            <span class="swatch-number">01</span>
+                            <span class="swatch-name">Lino Cálido</span>
+                        </div>
+                    </button>
+
+                    <!-- Opción 2: Variation 02 -->
+                    <button class="swatch-item" data-index="1" data-img="./media/variation02.png" data-name="Terracota Suave" data-tone="Almendra & Arcilla Orgánica" data-art="Lámina botánica de helechos silvestres con paspartú" data-desc="Tono envolvente de inspiración mediterránea y orgánica que contrasta con el marco de roble y genera sombras profundas.">
+                        <div class="swatch-outer-ring">
+                            <span class="swatch-core" style="background: linear-gradient(135deg, #d8baa1 0%, #c49c7d 100%);"></span>
+                        </div>
+                        <div class="swatch-info">
+                            <span class="swatch-number">02</span>
+                            <span class="swatch-name">Terracota</span>
+                        </div>
+                    </button>
+
+                    <!-- Opción 3: Variation 03 -->
+                    <button class="swatch-item" data-index="2" data-img="./media/variation03.png" data-name="Gris Alabastro Minimal" data-tone="Nordic Slate & Ceniza Frío" data-art="Composición abstracta contemporánea enmarcada" data-desc="Estética moderna contemporánea inspirada en el concreto claro pulido y la luz difusa escandinava.">
+                        <div class="swatch-outer-ring">
+                            <span class="swatch-core" style="background: linear-gradient(135deg, #c7ccd2 0%, #a4adb6 100%);"></span>
+                        </div>
+                        <div class="swatch-info">
+                            <span class="swatch-number">03</span>
+                            <span class="swatch-name">Gris Alabastro</span>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- Ficha Detallada del Estilo Seleccionado -->
+            <div class="active-style-card">
+                <div class="card-top">
+                    <span class="card-tag" id="detail-tag">ACABADO ACTIVO • 01</span>
+                    <h2 class="card-name" id="detail-name">Lino Nórdico Cálido</h2>
+                </div>
+
+                <p class="card-description" id="detail-desc">
+                    Aporta máxima calidez y aprovecha la iluminación directa de la ventana con un acabado mineral aterciopelado mate.
+                </p>
+
+                <div class="card-specs-grid">
+                    <div class="spec-cell">
+                        <span class="spec-title">Tonalidad Predominante</span>
+                        <span class="spec-value" id="detail-tone">Beige Arena Natural</span>
+                    </div>
+                    <div class="spec-cell">
+                        <span class="spec-title">Composición Artística</span>
+                        <span class="spec-value" id="detail-art">Cuadro de paisaje neutro en tonos tierra</span>
+                    </div>
+                    <div class="spec-cell">
+                        <span class="spec-title">Atmósfera Lumínica</span>
+                        <span class="spec-value" id="detail-light">Cálida envolvente (2700K - 3500K)</span>
+                    </div>
+                    <div class="spec-cell">
+                        <span class="spec-title">Acabado de Superficie</span>
+                        <span class="spec-value">Mineral mate de poro abierto</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navegación Rápida con Miniaturas de las Imágenes -->
+            <div class="thumbnails-preview-section">
+                <span class="section-label">Comparativa de Variaciones:</span>
+                <div class="thumbs-grid">
+                    <div class="thumb-card active" data-index="0">
+                        <img src="./media/variation01.png" alt="Miniatura Lino Nórdico">
+                        <div class="thumb-overlay">
+                            <span>01 • Lino</span>
+                        </div>
+                    </div>
+                    <div class="thumb-card" data-index="1">
+                        <img src="./media/variation02.png" alt="Miniatura Terracota">
+                        <div class="thumb-overlay">
+                            <span>02 • Terracota</span>
+                        </div>
+                    </div>
+                    <div class="thumb-card" data-index="2">
+                        <img src="./media/variation03.png" alt="Miniatura Gris Alabastro">
+                        <div class="thumb-overlay">
+                            <span>03 • Gris Slate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <script src="codigo.js"></script>
+</body>
+</html>

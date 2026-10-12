@@ -1,0 +1,873 @@
+/* ==========================================================================
+   LUXBAU STUDIO - PORSCHE INSPIRED INTERIOR CONFIGURATOR STYLES
+   ========================================================================== */
+
+:root {
+    --bg-main: #0b0c0e;
+    --bg-surface: #121418;
+    --bg-surface-elevated: #181b21;
+    --bg-surface-hover: #20242b;
+    --border-subtle: #23272f;
+    --border-prominent: #343a46;
+    
+    --text-primary: #f5f6f8;
+    --text-secondary: #9ea5b1;
+    --text-muted: #646b77;
+
+    --accent-red: #d5001c; /* Porsche Guards Red */
+    --accent-white: #ffffff;
+    --accent-gold: #c6a276;
+
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Space Grotesk', var(--font-sans);
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 14px;
+    --radius-full: 9999px;
+
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+body.porsche-theme {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   TOP PROGRESS BAR (Porsche Real-Time Render Simulation)
+   ========================================================================== */
+.render-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-red), #ff4d5e);
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(213, 0, 28, 0.6);
+    transition: width 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.render-bar.active {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   HEADER PRINCIPAL
+   ========================================================================== */
+.porsche-header {
+    height: 64px;
+    background-color: rgba(11, 12, 14, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 100;
+    position: sticky;
+    top: 0;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-back:hover {
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+    background-color: var(--bg-surface);
+}
+
+.header-divider {
+    width: 1px;
+    height: 24px;
+    background-color: var(--border-subtle);
+}
+
+.brand-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-logo {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+
+.brand-category {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+}
+
+.model-badge {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.model-title {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+}
+
+.model-variant {
+    font-size: 11px;
+    color: var(--accent-gold);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.transition-switch-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    gap: 4px;
+}
+
+.switch-caption {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0 6px;
+    font-weight: 600;
+}
+
+.switch-pill {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.switch-pill:hover {
+    color: var(--text-primary);
+}
+
+.switch-pill.active {
+    background-color: var(--bg-surface-hover);
+    color: var(--text-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.btn-fullscreen {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-fullscreen:hover {
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+    background-color: var(--bg-surface);
+}
+
+/* ==========================================================================
+   LAYOUT PRINCIPAL
+   ========================================================================== */
+.configurator-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    height: calc(100vh - 64px);
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   STAGE / VIEWPORT FOTOGRÁFICO
+   ========================================================================== */
+.stage-container {
+    position: relative;
+    background-color: #060708;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 24px;
+}
+
+.stage-viewport {
+    position: relative;
+    width: 100%;
+    max-width: 1380px;
+    height: 100%;
+    max-height: 85vh;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border-subtle);
+}
+
+/* Capas de imagen superpuestas para transición instantánea y sedosa */
+.stage-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transform: scale(1.01);
+    transition: opacity var(--transition-smooth), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity, transform;
+    pointer-events: none;
+}
+
+.stage-image.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+/* Zoom modo detalle */
+.stage-viewport.zoomed .stage-image.active {
+    transform: scale(1.35) translate(-5%, -5%);
+    cursor: grab;
+}
+
+/* ==========================================================================
+   PANTALLA DE ESPERA / RENDER HUD (PORSCHE STYLE)
+   ========================================================================== */
+.render-loading-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background-color: rgba(9, 10, 13, 0.75);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.render-loading-screen.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.render-hud-box {
+    background-color: rgba(18, 20, 24, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 24px 32px;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    min-width: 290px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+.porsche-spinner {
+    position: relative;
+    width: 38px;
+    height: 38px;
+}
+
+.spin-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-top-color: var(--accent-red);
+    border-radius: 50%;
+    animation: porsche-spin 0.65s linear infinite;
+}
+
+@keyframes porsche-spin {
+    to { transform: rotate(360deg); }
+}
+
+.render-hud-texts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+}
+
+.hud-overline {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent-red);
+}
+
+.hud-status {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.hud-progress-track {
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.hud-progress-fill {
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent-red);
+    border-radius: var(--radius-full);
+    transition: width 0.35s ease;
+}
+
+/* ==========================================================================
+   TOAST HUD Y AVISO DE MOBILIARIO
+   ========================================================================== */
+.hud-toast {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    z-index: 5;
+    background-color: rgba(18, 20, 24, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition-fast);
+}
+
+.hud-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #2ed573;
+    box-shadow: 0 0 6px rgba(46, 213, 115, 0.6);
+}
+
+.toast-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.disclaimer-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 5;
+    background-color: rgba(11, 12, 14, 0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.disclaimer-badge svg {
+    color: var(--accent-gold);
+    flex-shrink: 0;
+}
+
+/* Herramientas de visualización en el viewport */
+.stage-floating-actions {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stage-tool-btn {
+    background-color: rgba(18, 20, 24, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary);
+    padding: 7px 12px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.stage-tool-btn:hover {
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(28, 31, 38, 0.95);
+}
+
+.stage-tool-btn.active {
+    background-color: var(--text-primary);
+    color: #000;
+    border-color: var(--text-primary);
+}
+
+/* ==========================================================================
+   PANEL DE CONFIGURACIÓN LATERAL (ESTILO PORSCHE)
+   ========================================================================== */
+.controls-panel {
+    background-color: var(--bg-surface);
+    border-left: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 32px 28px;
+    gap: 28px;
+}
+
+.panel-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.panel-overline {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--accent-red);
+    text-transform: uppercase;
+}
+
+.panel-title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+}
+
+.panel-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   SWATCHES DE COLOR (PORSCHE STYLE CIRCULAR SWATCHES)
+   ========================================================================== */
+.swatches-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.swatches-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.swatches-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.swatch-item {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    outline: none;
+    text-align: center;
+}
+
+.swatch-item:hover {
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-prominent);
+    transform: translateY(-2px);
+}
+
+.swatch-outer-ring {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.swatch-core {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4);
+    display: block;
+}
+
+.swatch-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.swatch-number {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.swatch-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Estado activo del swatch (anillo blanco/rojo estilo Porsche) */
+.swatch-item.active {
+    background-color: var(--bg-surface-hover);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.swatch-item.active .swatch-outer-ring {
+    border-color: var(--accent-white);
+}
+
+.swatch-item.active .swatch-number {
+    color: var(--accent-red);
+}
+
+/* ==========================================================================
+   FICHA DE DETALLE DEL ESTILO SELECCIONADO
+   ========================================================================== */
+.active-style-card {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+}
+
+.card-name {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.card-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.card-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 14px;
+}
+
+.spec-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.spec-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.spec-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   MINIATURAS DE COMPARATIVA
+   ========================================================================== */
+.thumbnails-preview-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.thumbs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.thumb-card {
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.thumb-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-fast);
+}
+
+.thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 6px 8px;
+}
+
+.thumb-overlay span {
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.02em;
+}
+
+.thumb-card:hover {
+    border-color: var(--text-secondary);
+}
+
+.thumb-card:hover img {
+    transform: scale(1.06);
+}
+
+.thumb-card.active {
+    border: 2px solid var(--accent-white);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   PANEL FOOTER
+   ========================================================================== */
+.panel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.btn-share-style {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    padding: 9px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-share-style:hover {
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-prominent);
+}
+
+.shortcut-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.shortcut-hint kbd {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-prominent);
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-family: inherit;
+    font-size: 10px;
+    color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1080px) {
+    .configurator-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: auto;
+        overflow: visible;
+    }
+
+    .stage-container {
+        padding: 16px;
+        min-height: 50vh;
+    }
+
+    .controls-panel {
+        height: auto;
+        border-left: none;
+        border-top: 1px solid var(--border-subtle);
+    }
+}
+
+@media (max-width: 640px) {
+    .porsche-header {
+        padding: 0 14px;
+    }
+
+    .header-center {
+        display: none;
+    }
+
+    .switch-caption {
+        display: none;
+    }
+
+    .stage-container {
+        padding: 10px;
+    }
+
+    .controls-panel {
+        padding: 20px 16px;
+    }
+
+    .card-specs-grid {
+        grid-template-columns: 1fr;
+    }
+}
